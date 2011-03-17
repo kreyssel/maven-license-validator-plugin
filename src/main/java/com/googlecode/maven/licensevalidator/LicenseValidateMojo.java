@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.scee.otg.kzv.maven.license;
+package com.googlecode.maven.licensevalidator;
 
 import java.util.Collection;
 import java.util.Collections;
