@@ -5,7 +5,7 @@
     <packaging>maven-plugin</packaging>
     <name>maven-license-validator-plugin</name>
     <description>Maven plugin for validating license use in (transitive) dependencies</description>
-    <version>0.2</version>
+    <version>0.3-SNAPSHOT</version>
     <url>http://code.google.com/p/maven-license-validator-plugin/</url>
     <issueManagement>
         <system>Google code</system>
@@ -286,9 +286,9 @@
     </properties>
 
     <scm>
-        <connection>scm:svn:http://maven-license-validator-plugin.googlecode.com/svn/tags/maven-license-validator-plugin-0.2</connection>
-        <developerConnection>scm:svn:https://maven-license-validator-plugin.googlecode.com/svn/tags/maven-license-validator-plugin-0.2</developerConnection>
-        <url>http://maven-license-validator-plugin.googlecode.com/svn/tags/maven-license-validator-plugin-0.2</url>
+        <connection>scm:svn:http://maven-license-validator-plugin.googlecode.com/svn/trunk</connection>
+        <developerConnection>scm:svn:https://maven-license-validator-plugin.googlecode.com/svn/trunk</developerConnection>
+        <url>http://maven-license-validator-plugin.googlecode.com/svn/trunk/</url>
     </scm>
 
     <distributionManagement>
