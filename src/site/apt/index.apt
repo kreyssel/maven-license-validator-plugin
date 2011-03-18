@@ -1,0 +1,51 @@
+~~
+~~ Copyright (C) 2011 tdarby <tim.darby.uk@googlemail.com>
+~~
+~~ Licensed under the Apache License, Version 2.0 (the "License");
+~~ you may not use this file except in compliance with the License.
+~~ You may obtain a copy of the License at
+~~
+~~         http://www.apache.org/licenses/LICENSE-2.0
+~~
+~~ Unless required by applicable law or agreed to in writing, software
+~~ distributed under the License is distributed on an "AS IS" BASIS,
+~~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~~ See the License for the specific language governing permissions and
+~~ limitations under the License.
+~~
+
+------
+=Introduction=
+------
+Tim Darby
+------
+March 2011
+------
+
+-Maven License Validator Plugin-
+
+  The license-validator plugin is intended to help with maven project artifact license management.
+  The primarily feature is to be able to check the licenses on project dependencies and enforce
+  licensing restrictions as desired through the configuration.
+
+  []
+
+  The information will be taken from the implied (or specified) pom and from the
+  command line. The settings.xml file may also be parsed to retrieve user
+  credentials.
+
+
+* Goals Overview
+
+  The license validator plugin has 1 goal:
+
+  * {{{./validate-licenses-mojo.html}license-validator:validate-licenses}} is used to automatically check license
+files on all dependencies (transitively if selected) and fail if the licenses do not meet the required acceptance criteria
+
+  []
+
+* How To Use
+
+  Instructions on how to use the license validator plugin including examples can be found {{{./usage.html}here}}.
+
+  []  

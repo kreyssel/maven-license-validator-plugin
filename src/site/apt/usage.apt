@@ -1,0 +1,228 @@
+~~
+~~ Copyright (C) 2011 tdarby <tim.darby.uk@googlemail.com>
+~~
+~~ Licensed under the Apache License, Version 2.0 (the "License");
+~~ you may not use this file except in compliance with the License.
+~~ You may obtain a copy of the License at
+~~
+~~         http://www.apache.org/licenses/LICENSE-2.0
+~~
+~~ Unless required by applicable law or agreed to in writing, software
+~~ distributed under the License is distributed on an "AS IS" BASIS,
+~~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~~ See the License for the specific language governing permissions and
+~~ limitations under the License.
+~~
+
+------
+  Usage
+  ------
+  Alain Marion
+  ------
+  September 2009
+  ------
+
+Usage
+
+* Introduction
+
+  The googlecode Plugin has only one function that will publish you project distribution to
+  the project's googlecode download area.
+  This plugin is intended to be run during the maven <<<deploy>>> phase of the build lifecycle
+  and is implemented using the <<<googlecode:deploy>>> mojo.
+
+* The <<<googlecode:deploy>>> Mojo
+
+  This mojo has no default invocation phase set, therefore you will have to call it explicitly
+  using <<<googlecode:deploy>>>
+
+  In most cases, you are willing to invoke this mojo when you call the <<<deploy>>> phase of
+  the default build lifecycle. In order to do that, you can configure the plugin to attach the deploy goals
+  to the deploy phase of the build lifecycle:
+
++---+
+[...]
+<pluginManagement>
+      <plugin>
+        <groupId>googlecode.maven.plugin</groupId>
+        <artifactId>maven-googlecode-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>deploy</phase>
+            <goals>
+              <goal>deploy</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+</pluginManagement>
+[...]
++---+
+
+  Once you've configured your plugin target phase, your project's artifact will only require
+  invocation of the <<<deploy>>> phase of the build:
+
++---+
+mvn deploy
++---+
+
+  To enable this mojo to function you must add the plugin in your pom <<<<plugins>>>> section and provide valid credentials for your googlecode
+  account this have to be done using the server tag of your <<<settings.xml>>> file.
+  This can be done the following way:
+
++---+
+[...]
+<plugins>
+  	[...]
+    <plugin>
+        <artifactId>maven-googlecode-plugin</artifactId>
+        <configuration>
+        	<site>
+        		<id>google.download</id>
+        	</site>
+        </configuration>
+    </plugin>
+    [...]
+</plugins>
+[...]
++---+
+
+  Now, you can specify a server definition in your <<<settings.xml>>>
+  to provide authentication information this server.
+  Your server section might look like this:
+
++---+
+[...]
+<server>
+	<id>google.download</id>
+	<username>user</username>
+	<password>passwd</password>
+</server>
+[...]
++---+
+
+  Unfortunately, Maven doesn't currently support hashed or encrypted passwords
+  in the <<<settings.xml>>>.
+
+  Once you have correctly setup authentication for your googlecode account, your project's artifact
+  will only require invocation of the <<<googlecode:deploy>>> phase of the build to publish your deliverable:
+
++---+
+mvn googlecode:deploy
++---+
+
+  Using the previous default simple configuration, your project deliverable will uploaded the following way:
+
+  * upload url: default googlecode root upload url
+
+  * project name: <<<artifactId>>> for stand alone project, root project <<<artifactId>>> for a module of a multi-module project
+
+  * no summary description
+
+  * no label attached
+
+  * the file will be uploaded using the name: <<<artifiactId>>>-<<<version>>>.type
+
+  []
+
+** Optional Parameters
+
+  The default behavior of the plugin can be modified by overrinding default parameters values.
+
+  In the following samples the parameters are set in the <<<<plugins>>>> definition section,
+  but they can also freely be set in the <<<<pluginManagment>>>> section of your pom. On multi-modules projects,
+  definition of the custom configuration will most likely be in the <<<<pluginManagment>>>> section of the enclosing pom.
+
+*** Upload url
+
+  The location of the upload server can be changed to another <<<url>>> in order to do this, just specify an alternate <<<url>>> in the <<<<site>>>> tag.
+  This is mainly useful for testing purposes.
+
++---+
+[...]
+<plugins>
+  	[...]
+    <plugin>
+        <artifactId>maven-googlecode-plugin</artifactId>
+        <configuration>
+        	<site>
+        		<id>google.download</id>
+        		<url>http://my-alternate-url</url>
+        	</site>
+        </configuration>
+    </plugin>
+    [...]
+</plugins>
+[...]
++---+
+
+*** Googlecode project name
+
+  In case you use a different than the googlecode name for your project, you can specify an alternate name for your googlecode project
+  by setting the <<<<googlecode-name>>>> tag the following way:
+
++---+
+[...]
+<plugins>
+  	[...]
+    <plugin>
+        <artifactId>maven-googlecode-plugin</artifactId>
+        <configuration>
+        	<site>
+        		<id>google.download</id>
+        	</site>
+        	<googlecode-name>my_googlecode_project_name</googlecode-name>
+        </configuration>
+    </plugin>
+    [...]
+</plugins>
+[...]
++---+
+
+*** Summary
+
+  You can add a summary to your upload by specifying the summary parameter.
+
++---+
+[...]
+<plugins>
+  	[...]
+    <plugin>
+        <artifactId>maven-googlecode-plugin</artifactId>
+        <configuration>
+        	<site>
+        		<id>google.download</id>
+        	</site>
+        	<summary>my comments</summary>
+        </configuration>
+    </plugin>
+    [...]
+</plugins>
+[...]
++---+
+
+*** Labels
+
+  You can add some labels to your upload the following way:
+
++---+
+[...]
+<plugins>
+  	[...]
+    <plugin>
+        <artifactId>maven-googlecode-plugin</artifactId>
+        <configuration>
+        	<site>
+        		<id>google.download</id>
+        	</site>
+	        <labels>
+	        	<label>maven</label>
+	        	<label>java</label>
+	        	[...]
+        	</labels>
+        </configuration>
+    </plugin>
+    [...]
+</plugins>
+[...]
++---+
