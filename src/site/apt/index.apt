@@ -15,14 +15,14 @@
 ~~
 
 ------
-=Introduction=
+Introduction
 ------
 Tim Darby
 ------
 March 2011
 ------
 
--Maven License Validator Plugin-
+Maven License Validator Plugin
 
   The license-validator plugin is intended to help with maven project artifact license management.
   The primarily feature is to be able to check the licenses on project dependencies and enforce
@@ -33,6 +33,10 @@ March 2011
   The information will be taken from the implied (or specified) pom and from the
   command line. The settings.xml file may also be parsed to retrieve user
   credentials.
+
+  []
+
+  This project is hosted at {{{http://code.google.com/p/maven-license-validator-plugin/}maven-license-validator-plugin on Google Code}}
 
 
 * Goals Overview

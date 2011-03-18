@@ -76,7 +76,6 @@ public class LicenseValidateMojo extends AbstractMojo
      * Include transitive dependencies when downloading license files.
      *
      * @parameter default-value="true"
-     * @since 2.0.0
      */
     private boolean includeTransitiveDependencies;
 
