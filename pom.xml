@@ -5,7 +5,7 @@
     <packaging>maven-plugin</packaging>
     <name>maven-license-validator-plugin</name>
     <description>Maven plugin for validating license use in (transitive) dependencies</description>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
     <url>http://code.google.com/p/maven-license-validator-plugin/</url>
     <issueManagement>
         <system>Google code</system>
