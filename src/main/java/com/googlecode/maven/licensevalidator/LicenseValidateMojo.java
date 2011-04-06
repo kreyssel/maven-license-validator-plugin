@@ -125,17 +125,23 @@ public class LicenseValidateMojo extends AbstractMojo
      * Whether to bomb out on the first license error or report all errors before
      * exiting
      *
-     * @parameter default-value="true
+     * @parameter default-value="true"
      */
     public boolean failFast;
+
+    /**
+     * Whether to provide verbose information on what's going on
+     *
+     * @parameter default-value="false"
+     */
+    public boolean verbose;
 
     /////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////
     @Override
     public void execute() throws MojoExecutionException
     {
-        getLog().info("Validating licenses");
-
+        if (verbose) { getLog().info("Validating licenses"); }
         
         final Set<Artifact> depArtifacts;
         if (includeTransitiveDependencies)
@@ -185,12 +191,12 @@ public class LicenseValidateMojo extends AbstractMojo
         }
         else
         {
-            getLog().info("POM for dependency " + depProjectId + "being checked against allowedUnlicensed[" + allowedUnlicensed + "]");
+            if (verbose) { getLog().info("POM for dependency " + depProjectId + "being checked against allowedUnlicensed[" + allowedUnlicensed + "]"); }
             for (String match : allowedUnlicensed)
             {
                 if (depProjectId.equals(match) || depProjectId.matches(match))
                 {
-                    getLog().info("POM for dependency " + depProjectId + " matches allowed unlicensed matcher " + match);
+                    if (verbose) { getLog().info("POM for dependency " + depProjectId + " matches allowed unlicensed matcher " + match); }
                     return false;
                 }
             }
@@ -222,7 +228,7 @@ public class LicenseValidateMojo extends AbstractMojo
             {
                 if (name.equals(allowedLicense) || name.matches(allowedLicense))
                 {
-                    getLog().info("POM for dependency " + depProjectId + " matches allowed license " + name);
+                    if (verbose) { getLog().info("POM for dependency " + depProjectId + " matches allowed license " + name); }
                     hasAllowed = true;
                 }
             }
@@ -239,11 +245,15 @@ public class LicenseValidateMojo extends AbstractMojo
         
         if (hasAllowed)
         {
-            getLog().info("POM for dependency " + depProjectId + " has at least one allowed license.");
-            for (License license : licenses)
-            {
-                getLog().info(" - " + license.getName() + ".");
+            if (verbose) 
+            { 
+                getLog().info("POM for dependency " + depProjectId + " has at least one allowed license.");
+                for (License license : licenses)
+                {
+                    getLog().info(" - " + license.getName() + ".");
+                }
             }
+
             return false;
         }
         else if (hasBanned)
